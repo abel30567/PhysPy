@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 # for chi2 probability
 import scipy.stats as SS
-
+from parameters import *
 import pdb
 
 class Histo:
