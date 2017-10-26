@@ -844,7 +844,7 @@ def linearFit(func, y, x = None, y_err = None,  nplot = 100):
     return stat
 
 class LinearFit:
-     """
+    """
     
     simple line fit for a set of data. Example::
     
@@ -871,7 +871,6 @@ class LinearFit:
     
     NOTE: to use the covariance matrix you should scale it with the reduced chi square
     
-
     """
     def __init__(self, x, y, yerr=None, quiet = False):
         self.res = linfit(self.__line_f__, y, x=x, nplot = 2, y_err = yerr)
