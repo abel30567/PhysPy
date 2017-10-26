@@ -276,7 +276,7 @@ class Histo:
 
         """
         if axes is None:
-            axes = pl.gca()
+            axes = plt.gca()
         if ymin is None:
             ymin = self.cont_min
         # prepare histo plot if axes have changed
@@ -330,7 +330,7 @@ class Histo:
         useful if the histogram has been plotted.
         
         """
-        xmin,xmax = pl.xlim()
+        xmin,xmax = plt.xlim()
         self.set_window(xmin,xmax)
         
     def clear_window(self):
@@ -580,7 +580,7 @@ class Histo:
         useful if the histogram has been plotted.
         
         """
-        xmin,xmax = pl.xlim()
+        xmin,xmax = plt.xlim()
         self.fit(xmin,xmax, init = init)
         
 
@@ -665,7 +665,7 @@ class Histo:
 
         """
         if axes is None:
-            axes = pl.gca()
+            axes = plt.gca()
         if self.fit_dict == {}:
             print ('no fit, nothing to plot !')
         else:
