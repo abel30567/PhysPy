@@ -282,7 +282,7 @@ class Histo:
         # prepare histo plot if axes have changed
         self.__prepare_histo_plot()
         if filled :
-            axes.fill_between( self.x_intervals, self.y_intervals, y2=ymin, **kwargs)
+            axes.fill_between(self.x_intervals, self.y_intervals, y2=ymin, **kwargs)
         else:
             xx = np.concatenate([self.x_intervals[:1], self.x_intervals, self.x_intervals[-1:]])
             yy = np.concatenate([np.array([ymin]), self.y_intervals, np.array([ymin])])
@@ -718,8 +718,8 @@ class Histo:
         # prepare data for plotting as steps
         self.cont_min = self.res[0].min()
         iv = self.bin_width / 2.
-        self.x_intervals = np.array(zip( self.bin_center - iv, self.bin_center + iv)).ravel()
-        self.y_intervals = np.array(zip( self.bin_content, self.bin_content)).ravel()
+        self.x_intervals = np.array(list(zip( self.bin_center - iv, self.bin_center + iv))).ravel()
+        self.y_intervals = np.array(list(zip( self.bin_content, self.bin_content))).ravel()
         
         
     def __rebin_array(self, x, n):
