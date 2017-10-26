@@ -895,10 +895,9 @@ class LinearFit:
         self.y_intervals = self.res['y Intervals']
         # print fit information
         if not quiet:
-            print "chisq/dof = ", self.chi_red
-            print "offset  = ", self.offset, " +/- ", self.sigma_o
-            print "slope = ", self.slope, " +/- ", self.sigma_s
-
+            print ("chisq/dof = ", self.chi_red)
+            print ("offset  = ", self.offset, " +/- ", self.sigma_o)
+            print ("slope = ", self.slope, " +/- ", self.sigma_s)
     def __getitem__(self,x):
         return self.res[x]
 
