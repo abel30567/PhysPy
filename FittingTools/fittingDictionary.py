@@ -282,17 +282,17 @@ class Histo:
         # prepare histo plot if axes have changed
         self.__prepare_histo_plot()
         if filled :
-            axes.fill_between( self.xpl, self.ypl, y2=ymin, **kwargs)
+            axes.fill_between( self.x_intervals, self.y_intervals, y2=ymin, **kwargs)
         else:
-            xx = np.concatenate([self.xpl[:1], self.xpl, self.xpl[-1:]])
-            yy = np.concatenate([np.array([ymin]), self.ypl, np.array([ymin])])
+            xx = np.concatenate([self.x_intervals[:1], self.x_intervals, self.x_intervals[-1:]])
+            yy = np.concatenate([np.array([ymin]), self.y_intervals, np.array([ymin])])
             axes.plot(xx,yy, **kwargs)
         if self.window_set:
             axes.set_xlim( (self.win_min, self.win_max) )
             # prepare y scale
-            sel = (self.win_min <= self.xpl) & (self.xpl <= self.win_max)
-            ymin = self.ypl[sel].min()
-            ymax = self.ypl[sel].max()
+            sel = (self.win_min <= self.x_intervals) & (self.x_intervals <= self.win_max)
+            ymin = self.y_intervals[sel].min()
+            ymax = self.y_intervals[sel].max()
             axes.set_ylim( (ymin, ymax) )
         axes.set_xlabel(self.xlabel)
         axes.set_ylabel(self.ylabel)
@@ -315,11 +315,11 @@ class Histo:
         # a call to __setup_bins MUST preced usage of this call
         self.window_set = True
         if xmin is None:
-            self.win_min = self.xpl.min()
+            self.win_min = self.x_intervals.min()
         else:
             self.win_min = xmin
         if xmax is None:
-            self.win_max = self.xpl.max()
+            self.win_max = self.x_intervals.max()
         else:
             self.win_max = xmax
         return
@@ -341,8 +341,8 @@ class Histo:
         """
         # a call to __setup_bins MUST preced usage of this call
         self.window_set = False
-        self.win_min = self.xpl.min()
-        self.win_max = self.xpl.max()
+        self.win_min = self.x_intervals.min()
+        self.win_max = self.x_intervals.max()
 
     def plot_exp(self, **kwargs):
         """
@@ -409,8 +409,8 @@ class Histo:
         self.__prepare_histo_plot()
         # plot the fit
         x = np.linspace(self.bins[0], self.bins[-1:][0], 100.)
-        self.fit_dict['xpl'] = x
-        self.fit_dict['ypl'] = self.fit_func(x)
+        self.fit_dict['x_intervals'] = x
+        self.fit_dict['y_intervals'] = self.fit_func(x)
 
     def find_bin(self, x):
         """
@@ -556,8 +556,8 @@ class Histo:
                                    ftol = 0.001, \
                                    print_results = False)
         self.fit_dict = self.F.stat
-        self.fit_dict['xpl'] = self.F.xpl
-        self.fit_dict['ypl'] = self.F.ypl
+        self.fit_dict['x_intervals'] = self.F.x_intervals
+        self.fit_dict['y_intervals'] = self.F.y_intervals
         # get the covariance matrix
         if self.fit_dict == {}:
             print ("Problem with fit: no result, check parameters !")
@@ -649,8 +649,8 @@ class Histo:
         xmin = self.bins[self.fit_indx][0]
         xmax = self.bins[imax]
         x = np.linspace(xmin, xmax, 100.)
-        self.fit_dict['xpl'] = x
-        self.fit_dict['ypl'] = self.fit_func(x)
+        self.fit_dict['x_intervals'] = x
+        self.fit_dict['y_intervals'] = self.fit_func(x)
 
     def plot_fit(self, color = 'r', axes = None, **kwargs):
         """
@@ -669,7 +669,7 @@ class Histo:
         if self.fit_dict == {}:
             print ('no fit, nothing to plot !')
         else:
-            plot_line(self.fit_dict['xpl'], self.fit_dict['ypl'], color = color, axes = axes, **kwargs)
+            plot_line(self.fit_dict['x_intervals'], self.fit_dict['y_intervals'], color = color, axes = axes, **kwargs)
             if self.window_set:
                 axes.set_xlim( (self.win_min, self.win_max) )
 
@@ -718,8 +718,8 @@ class Histo:
         # prepare data for plotting as steps
         self.cont_min = self.res[0].min()
         iv = self.bin_width / 2.
-        self.xpl = np.array(zip( self.bin_center - iv, self.bin_center + iv)).ravel()
-        self.ypl = np.array(zip( self.bin_content, self.bin_content)).ravel()
+        self.x_intervals = np.array(zip( self.bin_center - iv, self.bin_center + iv)).ravel()
+        self.y_intervals = np.array(zip( self.bin_content, self.bin_content)).ravel()
         
         
     def __rebin_array(self, x, n):
@@ -829,7 +829,7 @@ def linearFit(func, y, x = None, y_err = None,  nplot = 100):
     # create an array with calculated values for plotting
     if (nplot > 0):
         x_intervals = linspace(x.min(), x.max(), nplot+1)
-        y_intervals = dot(par,func(xpl))
+        y_intervals = dot(par,func(x_intervals))
     stat = {'chisquare': chi2, \
                 'Reduced chisquare':chi2_red, \
                 'conf. level':CL, \
@@ -850,7 +850,7 @@ class LinearFit:
     
         >>> P = LinearFit(x,y, [yerr = errors])      # creates the fit
         >>> print P.res['parameters']              # print the parameters
-        >>> plot(P.xpl, P.ypl)                     # plot the fitted line
+        >>> plot(P.x_intervals, P.y_intervals)                     # plot the fitted line
         >>> P.line(x)                              # evaluate the fitted function at x 
 
     x and y are arrays (:func:`numpy.array`)
