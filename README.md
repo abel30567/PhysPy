@@ -5,6 +5,8 @@
 
 January 11, 2018
 
+<iframe src="https://giphy.com/embed/3ohjVcveOM9hoSVTAk" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/3ohjVcveOM9hoSVTAk">via GIPHY</a></p>
+
 Hi everyone, if you are seeing this you must be in Florida International University's Intermediate Physics Lab! 
 
 This course is very difficult and challenging. We felt like there was a huge learning curve in lab specially with the python coding that we were never introduced to! 
