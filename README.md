@@ -5,7 +5,7 @@
 
 January 11, 2018
 
-<img src="https://media.giphy.com/media/3ohjVcveOM9hoSVTAk/giphy.gif" />
+<img src="http://wanda.fiu.edu/boeglinw/courses/Modern_lab_manual3/_images/em_apparatus.png" />
 
 Hi everyone, if you are seeing this you must be in Florida International University's Intermediate Physics Lab! 
 
